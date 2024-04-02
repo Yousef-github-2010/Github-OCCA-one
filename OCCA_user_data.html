@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Download Data</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="form-container">
+      <h1>Enter your data:</h1>
+      <form id="data-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <button id="submit-button" type="submit">Save Data</button>
+      </form>
+    </div>
+
+    <a id="download-link" style="display: none;">Download</a>
+
+    <script src="script.js">
+        const form = document.getElementById("data-form");
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const emailInput = document.getElementById("email");
+const downloadLink = document.getElementById("download-link");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const data = `Name: ${nameInput.value}\nPhone: ${phoneInput.value}\nEmail: ${emailInput.value}`;
+
+  const blob = new Blob([data], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  downloadLink.href = url;
+  downloadLink.download = "data.txt";
+  downloadLink.style.display = "block";
+});
+    </script>
+  </body>
+</html>
